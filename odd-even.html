@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odd or Even</title>
+</head>
+<body>
+  <h1 id="welcome"></h1>
+  <p id="message"></p>
+
+  <script>
+    /*
+    Odd or even
+
+    Welcome a user then ask them for a number between 1 and 1000.
+    When the user gives you the number, you check if it's odd or even and then you print a message letting them know.
+
+    Example:
+    Prompt: What number are you thinking?
+    Input: 25
+    Output: That's an odd number! Have another?  
+    */
+
+    // welcome user
+    let user = prompt("Please enter your name");
+    let welcomeHeader = document.getElementById("welcome");
+
+    while (user === '') {
+      //TODO: if user doesn't input anything
+      user = prompt("Please enter your name")
+    }
+    if (user != null) {
+      welcome.innerHTML = `Welcome, ${user}!`;
+    }
+
+    // ask for a number between 1 and 1000
+    let number = prompt("Please enter a number between 1 and 1000");
+
+    // check if number given is odd or even
+    function oddOrEven(num) {
+      if (number % 2 !== 0) return "odd";
+      return "even";
+    };
+    
+    // print a message letting them know
+    let message = document.getElementById("message");
+    //TODO: edge cases are if user input is empty string, or not a number within constraints
+    if (number != null) {
+      message.innerHTML = `That's an ${oddOrEven(number)} number! Have another?`
+    }
+    //TODO: if user has more numbers in mind, click button to enter another number
+  </script>
+</body>
+</html>
