@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madlibs Game</title>
+</head>
+<body>
+  <h1>Mad Lib!</h1>
+  <p></p>
+  <style>
+    h1 {
+      text-align: center;
+    }
+
+    p {
+      width: 1000px;
+      height: 500px;
+      margin: auto;
+      line-height: 150%;
+    }
+
+    span {
+      color: red;
+    }
+  </style>
+  <script>
+    /*
+    Mad libs game
+
+    Ask the user for an input.
+    This could be anything such as a name, an adjective, a pronoun or even an action. Once you get the input, you can rearrange it to build up your own story.
+
+    Here's a youtube tutorial on mad libs in Python. (https://www.youtube.com/watch?v=u7g9mRzQLYE)
+    And example code on Github. (https://github.com/ChalzZy/Mad-Libs-Generator/blob/master/Mad_Libs_Generator/main.py)
+    */
+
+    let pTag = document.querySelector("p");
+    let words = [
+      "adjective",
+      "adverb",
+      "noun",
+      "adverb",
+      "adjective",
+      "a place",
+      "noun",
+      "part of the body",
+      "adjective",
+      "noun",
+      "adjective",
+      "number",
+      "adverb",
+      "adjective",
+      "noun"
+    ];
+
+  function madlib(words) {
+    let result = [];
+    for (let type of words) {
+      let input = prompt(`Enter a(n) ${type}`);
+      result.push(input);
+    };
+
+    return `Ladies, you are two of the smartest, most <span>${result[0]}</span> women in this entire office, and I have come to you today because I need your help.  I'll be <span>${result[1]}</span> honest: I have to take a big <span>${result[2]}</span> in the bathroom, and I need to find a stall with a strong Wi-Fi signal.  I mean, data plans are <span>${result[3]}</span> expensive, and without being too specific, I'm going to be in there for a very, very <span>${result[4]}</span> time.  I had the lunch special at Cafe el <span>${result[5]}</span> and it's like a ticking time <span>${result[6]}</span> in my <span>${result[7]}</span>, if you know what I mean.  Anyway, since they removed the <span>${result[8]}</span> magazines from the men's bathroom, I have a difficult time concentrating on the <span>${result[9]}</span> at hand.  The women's restroom is right next door.  So if you don't mind, go in, check out the Wi-Fi and tell me which area has the most <span>${result[10]}</span> signal.  I would do it myself, but once I sit down, I'm commited for at least <span>${result[11]}</span> minutes.  We can't be <span>${result[12]}</span> obvious about this, though, so be <span>${result[13]}</span>.  Got it?  Good.  Now, please hurry.  The turtle is starting to poke his head out of his <span>${result[14]}</span>, if you know what I mean.`
+
+  };
+
+  pTag.innerHTML = madlib(words);
+
+  </script>
+</body>
+</html>
