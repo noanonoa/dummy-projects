@@ -17,13 +17,24 @@ function Calculator() {
     setDisplay('0');
   };
 
+  function toggleSign() {
+    const newValue = parseFloat(display) * -1;
+    setDisplay(String(newValue));
+  };
+
+  function inputPercentage() {
+    const currentValue = parseFloat(display);
+    if (currentValue === 0) return;
+    setDisplay(String(currentValue / 100));
+  };
+
   return (
     <div className="calculator">
       <div className="display">{ display }</div>
       <div className="keypad">
         <button className="btn function" onClick={() => clearDisplay()}>AC</button>
-        <button className="btn function">+/-</button>
-        <button className="btn function">%</button>
+        <button className="btn function" onClick={() => toggleSign()}>+/-</button>
+        <button className="btn function" onClick={() => inputPercentage()}>%</button>
         <button className="btn operator">÷</button>
         <button className="btn digit" onClick={() => inputDigit(7)}>7</button>
         <button className="btn digit" onClick={() => inputDigit(8)}>8</button>
@@ -32,7 +43,7 @@ function Calculator() {
         <button className="btn digit" onClick={() => inputDigit(4)}>4</button>
         <button className="btn digit" onClick={() => inputDigit(5)}>5</button>
         <button className="btn digit" onClick={() => inputDigit(6)}>6</button>
-        <button className="btn operator minus">-</button>
+        <button className="btn operator">-</button>
         <button className="btn digit" onClick={() => inputDigit(1)}>1</button>
         <button className="btn digit" onClick={() => inputDigit(2)}>2</button>
         <button className="btn digit" onClick={() => inputDigit(3)}>3</button>
