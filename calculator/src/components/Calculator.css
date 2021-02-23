@@ -1,5 +1,7 @@
 .calculator {
+  position: relative;
   max-width: 370px;
+  height: 595px;
   margin: 0 auto;
   border-radius: 30px;
   background-color: #000;
@@ -7,18 +9,22 @@
 }
 
 .display {
-  width: 100%;
+  display: inline-block;
   height: 150px;
   padding: 0 20px;
   font-size: 80px;
   line-height: 150px;
-  text-align: right;
   font-weight: 100;
   color: #fff;
   user-select: none;
+  position: absolute;
+  right: 0;
+  transform-origin: right;
 }
 
 .keypad {
+  position: absolute;
+  top: 150px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
