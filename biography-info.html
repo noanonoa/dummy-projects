@@ -7,18 +7,68 @@
   <title>Biography Info</title>
 </head>
 <body>
-  <script>
-// Biography info
-// Ask a user for their personal information one question at a time. Then check that the information they entered is valid. Finally, print a summary of all the information they entered back to them.
-
-// Example: What is your name? If the user enters * you prompt them that the input is wrong, and ask them to enter a valid name.
-
-// At the end you print a summary that looks like this:
-
-// - Name: John Doe
-// - Date of birth: Jan 1, 1954
-// - Address: 24 fifth Ave, NY
-// - Personal goals: To be the best programmer there ever was.
-  </script>
+  <h1>Biography Info</h1>
+  <p id="username"></p>
+  <p id="dob"></p>
+  <p id="address"></p>
+  <p id="goals"></p>
 </body>
+<script>
+  // Biography info
+  // Ask a user for their personal information one question at a time. Then check that the information they entered is valid. Finally, print a summary of all the information they entered back to them.
+
+  // Example: What is your name? If the user enters * you prompt them that the input is wrong, and ask them to enter a valid name.
+
+  // At the end you print a summary that looks like this:
+
+  // - Name: John Doe
+  // - Date of birth: Jan 1, 1954
+  // - Address: 24 fifth Ave, NY
+  // - Personal goals: To be the best programmer there ever was.
+  
+  const userInfo = {
+    "name": "",
+    "dob": {
+      "month": "",
+      "date": "",
+      "year": ""
+    },
+    "address": "",
+    "goals": ""
+  };
+
+  function getSummary() {
+    const name = document.getElementById("username");
+    const dob = document.getElementById("dob");
+    const address = document.getElementById("address");
+    const goals = document.getElementById("goals");
+  
+    // Initial Prompt
+    while (userInfo.name === "") userInfo.name = prompt("What is your name?");
+
+    // If user input for name is invalid; any character outside the range of A-Z, a-z, and whitespace
+    while (userInfo.name.match(/[^A-Za-z\s]/)) userInfo.name = prompt("Invalid input.  Please enter your name.");
+
+    // take user input string of birthday
+    userInfo.dob = (prompt("What is your birthdate?", "dd/mm/yyyy").split("/"));
+
+    // transform numeric month to written month
+    userInfo.dob.month = new Intl.DateTimeFormat("en-US", { month: "short" }).format(new Date().setMonth(Number(userInfo.dob[0]) - 1));
+
+    userInfo.dob.date = Number(userInfo.dob[1]);
+    userInfo.dob.year = Number(userInfo.dob[2]);
+
+    // prompt user address and user goal
+    userInfo.address = prompt("What is your address?");
+    userInfo.goals = prompt("What is your personal goal?");
+
+    // set HTML elements with user input
+    name.innerText = `- Name: ${userInfo.name}`;
+    dob.innerText = `- Date of Birth: ${userInfo.dob.month} ${userInfo.dob.date}, ${userInfo.dob.year}`;
+    address.innerText = `- Address: ${userInfo.address}`;
+    goals.innerText = `- Personal Goals: ${userInfo.goals}`;
+  };
+
+  getSummary();
+</script>
 </html>
