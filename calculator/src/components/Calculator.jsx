@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Calculator.css";
 
+// FIXME: set autoscale width to new state, and scale it by means of the state, not querySelector
+// FIXME: instead of HTML and CSS class tags, use mapping method to render each element
+
 function Calculator() {
   const [displayValue, setDisplayValue] = useState("0");
   const [waitingForOperand, setWaitingForOperand] = useState(false);
