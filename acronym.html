@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's My Acronym</title>
+</head>
+<body>
+  <h1>What's My Acronym?</h1>
+  <p id="acronym-display" style="height: 1em"></p>
+  <div id="container">
+    <label for="acronym-translator">Translator:</label>
+    <input type="text" id="acronym-translator" name="acronym translator" size="50" placeholder="ie. As Soon As Possible -> ASAP.">
+    <button onclick="translateAcronym()">Translate</button>
+  </div>
+</body>
+<script>
+// What's my acronym?
+
+// Ask the user to enter the full meaning of an organization or concept and you'll provide the acronym to the user. For example:
+
+// Input -> As Soon As Possible. Output -> ASAP.
+// Input -> World Health Organization. Output -> WHO.
+// Input -> Absent Without Leave. Output -> AWOL.
+
+function translateAcronym() {
+  // 1. get input string
+  const userInput = document.getElementById("acronym-translator").value;
+
+  // 2. split string at spaces
+  const wordsToAcronym = userInput.split(" ");
+
+  // 3. acronym results
+  let result = new String("");
+
+  // 4. get first characters of each word
+  let inputIsValid = false;
+  const firstCharacters = wordsToAcronym.forEach( (word) => getFirstCharacter(word));
+  function getFirstCharacter(word) {
+    if (word !== "") {
+      inputIsValid = true;
+      return result += word[0].toUpperCase();
+    }
+    return result = "Please enter a valid input";
+  };
+
+  // 5. display acronym on the client
+  const acronymDisplay = document.getElementById("acronym-display");
+  if (!inputIsValid) acronymDisplay.style.color = "red";
+  else acronymDisplay.style.color = "black";
+  acronymDisplay.innerText = result + ".";
+};
+</script>
+</html>
