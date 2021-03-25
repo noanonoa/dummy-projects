@@ -8,5 +8,6 @@ Run any files by opening the `html` file.
  - [Email Slicer](email-slicer.html)
  - [Mad Libs](mad-libs.html)
  - [Odd or Even](odd-even.html)
+ - [Palindrome](palindrome.html)
  - [What's my Acronym?](acronym.html)
  - [Word Count](word-count.html)
