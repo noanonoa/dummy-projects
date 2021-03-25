@@ -4,10 +4,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Palindrom</title>
+  <title>Palindrome</title>
 </head>
 <body>
   <h1>Palindrome</h1>
+  <h2>Please enter 5 words.  I will tell you which one is a palindrome.</h2>
+  <div id="container" style="width: 300px; display: flex; flex-direction: column;">
+    <label for="first-word">1st:</label>
+    <input type="text" id="first-word" name="first word">
+    <label for="second-word">2nd:</label>
+    <input type="text" id="second-word" name="second word">
+    <label for="third-word">3rd:</label>
+    <input type="text" id="third-word" name="third word">
+    <label for="fourth-word">4th:</label>
+    <input type="text" id="fourth-word" name="fourth word">
+    <label for="fifth-word">5th:</label>
+    <input type="text" id="fifth-word" name="fifth word">
+    <div id="go-button" style="margin-top: 10px;">
+      <button onclick="isPalindrome()" style="width: 150px; height: 50px;">GO</button>
+    </div>
+  </div>
 </body>
 <script>
 // Is a palindrome
@@ -20,5 +36,8 @@
 // madam is a palindrome.
 // so is malayalam.
 // But not geeks.
+function isPalindrome() {
+  
+};
 </script>
 </html>
