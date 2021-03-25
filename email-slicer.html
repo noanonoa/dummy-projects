@@ -7,7 +7,13 @@
   <title>E-mail Slicer</title>
 </head>
 <body>
-  <h1>Hello World</h1>
+  <h1>E-mail Slicer</h1>
+  <p id="display-text" style="height: 2em"></p>
+  <div id="container">
+    <label for="user-input">Enter an e-mail:</label>
+    <input type="text" id="user-input" name="user-input" size="50" placeholder="email@example.com">
+    <button onclick="analyzeEmail()">OK</button>
+  </div>
 </body>
 <script>
 // Email slicer
@@ -21,5 +27,67 @@
 // This is a convenient python project that has a lot of use in the future. The program helps get you the username and domain name from an email address.
 
 // If you want to push this further, you can customize the application and send a message to the host with this information.
+
+const analyzeEmail = () => {
+  // 1. Dissect user input -> user.name@domain.com
+  const userInput = document.getElementById("user-input").value;
+  const displayText = document.getElementById("display-text");
+  const user = {
+    "name": "",
+    "domain": "",
+    "company": "",
+    "analysis": ""
+  };
+
+  // 2. Check for valid email
+  if (userInput.includes("@")) {
+    const [ username, domain ] = userInput.split("@");
+
+    // 3. Check for valid domain
+    if (username !== "" && domain.includes(".")  && domain.lastIndexOf(".") !== domain.length-1) {
+      // TODO: if there are non-alphabetic characters in the username, only get its first part
+      user.name = username.charAt(0).toUpperCase() + username.slice(1);
+      user.domain = domain;
+
+      // 4. Check if domain is popular
+      const checkDomain = (domain) => {
+        if (domain.includes("gmail.com")) {
+          user.company = "Google";
+          return true;
+        } else if (domain.includes("icloud.com")) {
+          user.company = "Apple";
+          return true;
+        } else {
+          user.company = domain.charAt(0).toUpperCase() + domain.slice(1, domain.indexOf("."));
+          return false;
+        }
+      };
+      const isDomainPopular = checkDomain(domain);
+      if (isDomainPopular) {
+        user.analysis = `Hey ${user.name}, I see your email is registered with ${user.company}.  That's cool!`;
+      } else {
+        user.analysis = `Hey ${user.name}, looks like you've got your own custom setup at ${user.company}.  Impressive!`;
+      }
+    } else {
+      // If domain is invalid
+      user.name = "";
+      user.domain = "";
+      user.company = "";
+      user.analysis = "Invalid email address";
+    }
+  } else {
+    // If email does not include "@"
+    user.name = "";
+    user.domain = "";
+    user.company = "";
+    user.analysis = "Invalid email address";
+  }
+
+  // 5. Display analysis on client
+  displayText.innerText = user.analysis;
+
+  // 6. Return results
+  return user;
+};
 </script>
 </html>
