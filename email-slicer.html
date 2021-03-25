@@ -45,14 +45,16 @@ const analyzeEmail = () => {
 
     // 3. Check for valid domain
     if (username !== "" && domain.includes(".")  && domain.lastIndexOf(".") !== domain.length-1) {
-      const nonAlphabeticCharacter = username.match(/[^A-Za-z]/).index;
-      user.name = username.charAt(0).toUpperCase() + username.slice(1, nonAlphabeticCharacter);
+      // If there are non-alphabetic characters in the username, only get its first part
+      const nonAlphabeticCharacter = username.match(/[^A-Za-z]/);
+      if (!username.includes(nonAlphabeticCharacter)) {
+        user.name = username.charAt(0).toUpperCase() + username.slice(1);
+      } else {
+        const nonAlphabeticIndex = nonAlphabeticCharacter.index;
+        user.name = username.charAt(0).toUpperCase() + username.slice(1, nonAlphabeticIndex);
+      }
       user.domain = domain;
-      // TODO: if there are non-alphabetic characters in the username, only get its first part
-      console.log(nonAlphabeticCharacter);
-      console.log(user.name);
       
-
       // 4. Check if domain is popular
       const checkDomain = (domain) => {
         if (domain.includes("gmail.com")) {
@@ -93,5 +95,6 @@ const analyzeEmail = () => {
   // 6. Return results
   return user;
 };
+
 </script>
 </html>
