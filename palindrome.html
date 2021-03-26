@@ -7,21 +7,49 @@
   <title>Palindrome</title>
 </head>
 <body>
+  <style>
+    label {
+      display: inline-block;
+      width: 40px;
+    }
+    input {
+      width: 220px;
+    }
+    #form-container > div {
+      width: 400px;
+    }
+    #go-button button {
+      margin-top: 10px;
+      margin-left: 44px;
+      width: 228px;
+      height: 25px;
+    }
+  </style>
   <h1>Palindrome</h1>
   <h2>Please enter 5 words.  I will tell you which one is a palindrome.</h2>
-  <div id="container" style="width: 300px; display: flex; flex-direction: column;">
-    <label for="first-word">1st:</label>
-    <input type="text" id="first-word" name="first word">
-    <label for="second-word">2nd:</label>
-    <input type="text" id="second-word" name="second word">
-    <label for="third-word">3rd:</label>
-    <input type="text" id="third-word" name="third word">
-    <label for="fourth-word">4th:</label>
-    <input type="text" id="fourth-word" name="fourth word">
-    <label for="fifth-word">5th:</label>
-    <input type="text" id="fifth-word" name="fifth word">
-    <div id="go-button" style="margin-top: 10px;">
-      <button onclick="isPalindrome()" style="width: 150px; height: 50px;">GO</button>
+  <div id="form-container">
+    <div>
+      <label for="first-word">1st:</label>
+      <input type="text" id="first-word" name="first word">
+    </div>
+    <div>
+      <label for="second-word">2nd:</label>
+      <input type="text" id="second-word" name="second word">
+    </div>
+    <div>
+      <label for="third-word">3rd:</label>
+      <input type="text" id="third-word" name="third word">
+    </div>
+    <div>
+      <label for="fourth-word">4th:</label>
+      <input type="text" id="fourth-word" name="fourth word">
+    </div>
+    <div>
+      <label for="fifth-word">5th:</label>
+      <input type="text" id="fifth-word" name="fifth word">
+    </div>
+    <div id="go-button">
+      <button onclick="isPalindrome()">GO</button>
     </div>
   </div>
 </body>
@@ -37,7 +65,22 @@
 // so is malayalam.
 // But not geeks.
 function isPalindrome() {
-  
+  const userInput = {
+    "firstWord": document.getElementById("first-word").value,
+    "secondWord": document.getElementById("second-word").value,
+    "thirdWord": document.getElementById("third-word").value,
+    "fourthWord": document.getElementById("fourth-word").value,
+    "fifthWord": document.getElementById("fifth-word").value
+  };
+  let nthChild = 0;
+  for (const word in userInput) {
+    const wordReversed = userInput[word].split("").reverse().join("");
+    nthChild++;
+    if (userInput[word] === "") break;
+    if (userInput[word] === wordReversed) {
+      console.log(nthChild, userInput[word]);
+    }
+  };
 };
 </script>
 </html>
