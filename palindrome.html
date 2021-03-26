@@ -90,15 +90,15 @@
 <script>
 // Is a palindrome
 // Ask the user to give you five words. Then check if any of the five words is a palindrome.
-
 // A palindrome is a word that remains the same whether it's read forward or backward.
 
 // Example:
-
 // madam is a palindrome.
 // so is malayalam.
 // But not geeks.
+
 function isPalindrome() {
+  // 1. get user input
   const userInput = {
     "firstWord": document.getElementById("first-word").value,
     "secondWord": document.getElementById("second-word").value,
@@ -106,19 +106,30 @@ function isPalindrome() {
     "fourthWord": document.getElementById("fourth-word").value,
     "fifthWord": document.getElementById("fifth-word").value
   };
+  
+  // 2. get nthChild number for query selector
   let nthChild = 0;
+
+  // 3. iterate through user input object
   for (const word in userInput) {
+
+    // a. count up nthChild
     nthChild++;
+
+    // b. reverse the word of user input
     const wordReversed = userInput[word].split("").reverse().join("");
+
+    // c. checkmark message
     const checkmark = document.querySelector(`#form-container div:nth-child(${nthChild}) span`);
+
+    // d. if user input is empty, hide checkmark and move to the next word
     if (userInput[word] === "") {
       checkmark.style.visibility = "hidden";
       continue;
     }
-    if (userInput[word] === wordReversed) {
-      console.log(nthChild, userInput[word]);
-      checkmark.style.visibility = "visible";
-    }
+
+    // e. if word is a palindrome, show checkmark message
+    if (userInput[word] === wordReversed) checkmark.style.visibility = "visible";
     else checkmark.style.visibility = "hidden";
   };
 };
