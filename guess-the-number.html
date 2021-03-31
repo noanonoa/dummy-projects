@@ -29,8 +29,25 @@
     // Whenever they guess the wrong number you ask if they want to keep playing or if they'd like to quit.
     // Finally, when the user eventually guesses the right number you congratulate them and show the number of attempts they had.
 
-    function guessNumber() {
+    // Generate random number to guess between 1 - 50
+    let numberToGuess = Math.floor(Math.random() * 50) + 1;
 
+    function guessNumber() {
+      // Get the user's guessed number
+      const userInput = {
+        "guessed": Number(document.getElementById("guess-number").value)
+      };
+      
+      // Display the results
+      const displayResult = document.getElementById("display-result");
+
+      // If user's guess is outside range of 1-50, prompt error
+      const errorMessage = "Please enter a number between 1 and 50.";
+      (userInput.guessed < 1 || userInput.guessed > 50) ? displayResult.innerText = errorMessage : calculateUserGuess(numberToGuess, userInput.guessed);
+    };
+
+    function calculateUserGuess(target, number) {
+      console.log(target, number);
     };
   </script>
 </body>
