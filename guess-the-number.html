@@ -6,16 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guess The Number</title>
 </head>
+<style>
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+  }
+</style>
 <body>
   <h1>Guess The Number</h1>
+  <div class="form-container">
+    <label for="guess-number">Enter a number between 1-50</label>
+    <input type="text" id="guess-number" name="guess-number">
+    <button onclick="guessNumber()">submit</button>
+  </div>
+    <p id="display-result"></p>
+  <script>
+    // Guess the number
+
+    // You ask a user to guess a number between 1 and 50.
+    // If they guess outside that range, you prompt with an error encouraging them to choose a number within the proper range.
+    // Whenever they guess the wrong number you ask if they want to keep playing or if they'd like to quit.
+    // Finally, when the user eventually guesses the right number you congratulate them and show the number of attempts they had.
+
+    function guessNumber() {
+
+    };
+  </script>
 </body>
-<script>
-// Guess the number
-
-// You ask a user to guess a number between 1 and 50.
-// If they guess outside that range, you prompt with an error encouraging them to choose a number within the proper range.
-// Whenever they guess the wrong number you ask if they want to keep playing or if they'd like to quit.
-// Finally, when the user eventually guesses the right number you congratulate them and show the number of attempts they had.
-
-</script>
 </html>
