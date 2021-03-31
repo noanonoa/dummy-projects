@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lyrics Generator</title>
+</head>
+<style>
+  .search-form {
+    width: 300px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .search-form div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+</style>
+<body>
+  <h1>Search Lyrics</h1>
+  <div class="search-form">
+    <div>
+      <label for="artist-name">artist</label>
+      <input type="text" id="artist-name" name="artist-name" placeholder="Beatles" />
+    </div>
+    <div>
+      <label for="song-title">song</label>
+      <input type="text" id="song-title" name="song-title" placeholder="Eight Days A Week" />
+    </div>
+    <div>
+      <button onclick="getLyrics()">search</button>
+    </div>
+  </div>
+  <h2 id="song-title-and-artist-name"></h2>
+  <p id="lyrics-display"></p>
+</body>
+<script>
+// Lyrics generator
+
+// Ask a user to choose from a list of 10 songs. When the user does, you print out the lyrics to the song they selected.
+
+// Example:
+
+// Welcome, please select a song from this top 10 songs:
+
+// 1. Baby by Bieber
+// 2. Hotline Bling by Drake
+// 3. Flawless by Beyonce
+// 4. Fall by Eminem...
+// You chose Flawless by Beyonce. Here you go:
+
+// ------- Flawless by Beyonce ------------
+// I'm out that H, town coming coming down
+// I'm coming down, drippin' candy on the ground
+// H, Town, Town, I'm coming down, coming down
+// Drippin' candy on the ground...
+
+// Press * to choose again.
+// To push it further, have at least 3 songs by the same artist.
+
+// Next, ask the user to put the name of the artist so you can show them only options by that artist. Then the user can select a specific song from that list.
+
+const getLyrics = async () => {
+  // User input for artist name and song title
+  const userInput = {
+    "artist": document.getElementById("artist-name").value,
+    "songTitle": document.getElementById("song-title").value
+  };
+
+  // Destructure user input
+  const { artist, songTitle } = userInput;
+
+  // TODO: upper case artist name and song title
+  // TODO: fetch API for Shazam API
+
+  // fetch API for lyrics
+  const lyricsUrl = `https://api.lyrics.ovh/v1/${artist}/${songTitle}`;
+  const lyrics = await fetch(lyricsUrl, {
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    return data.lyrics;
+  });
+
+  displayHeader(songTitle, artist);
+  displayLyrics(lyrics);
+};
+
+// Display search query in header
+const displayHeader = (songTitle, artist) => {
+  const songTitleAndArtistNameHeader = document.getElementById("song-title-and-artist-name");
+  songTitleAndArtistNameHeader.innerText = `${songTitle} by ${artist}`;
+};
+
+// Display lyrics results on client side
+const displayLyrics = (lyrics) => {
+  const lyricsDisplay = document.getElementById("lyrics-display");
+  lyricsDisplay.innerText = `${lyrics}`;
+};
+</script>
+</html>
