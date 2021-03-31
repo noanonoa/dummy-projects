@@ -18,7 +18,8 @@
   <div class="form-container">
     <label for="guess-number">Enter a number between 1-50</label>
     <input type="text" id="guess-number" name="guess-number">
-    <button onclick="guessNumber()">guess</button>
+    <button id="guess-button" onclick="guessNumber()">guess</button>
+    <button id="quit-button" onclick="restart()" style="visibility: hidden">quit</button>
   </div>
     <p id="display-result"></p>
   <script>
@@ -35,38 +36,61 @@
     // Keep track of attempts of guesses
     let attempts = 0;
 
-    function guessNumber() {
-      // attempts should increase each time user guesses
-      attempts++;
+    // Display or hide buttons
+    const guessButton = document.getElementById("guess-button");
+    const quitButton = document.getElementById("quit-button");
 
+    // Display the results
+    const displayResult = document.getElementById("display-result");
+
+
+    function guessNumber() {
       // Get the user's guessed number
+      // FIXME: currently if the input is alphabetic and non-numeric, it is considered valid
       const userInput = {
         "guessed": Number(document.getElementById("guess-number").value)
       };
-      
-      // Display the results
-      const displayResult = document.getElementById("display-result");
 
       // If user's guess is outside range of 1-50, prompt error
       const errorMessage = "Please enter a number between 1 and 50.";
 
-      // Display message for successful guess attempt
-      const successMessage = `Congratulations, you have guessed number ${numberToGuess} successfully in ${attempts} attempts!`
-
       // Helper function to check user's guess
       function calculateUserGuess(target, number) {
-        console.log(target, number, attempts);
+        // Attempts should increase each time user guesses a valid number
+        attempts++;
+
         // When the user guesses correctly
-        if (target === number) return displayResult.innerText = successMessage;
-        
-        // When the user guesses incorrectly
-        // TODO: display two different buttons: guess, or quit
+        if (target === number) {
+          // Display message for successful guess attempt
+          const successMessage = `Congratulations, you have guessed number ${numberToGuess} successfully in ${attempts} attempts!`
+          guessButton.style.visibility = "hidden";
+          quitButton.innerText = "restart";
+          return displayResult.innerText = successMessage;
+        }
+
+        // When the user guesses incorrectly display two different buttons: keep guessing, quit
+        guessButton.innerText = "keep guessing";
+        quitButton.style.visibility = "visible";
+
+        // if it's a valid input and error message is shown, clear the error message
+        displayResult.innerText = "";
       };
+
       (userInput.guessed < 1 || userInput.guessed > 50) ? displayResult.innerText = errorMessage : calculateUserGuess(numberToGuess, userInput.guessed);
-
-
     };
 
+    function restart() {
+      // clear everything
+      numberToGuess = Math.floor(Math.random() * 50) + 1;
+      attempts = 0;
+      quitButton.style.visibility = "hidden";
+      guessButton.innerText = "guess";
+      guessButton.style.visibility = "visible";
+      displayResult.innerText = "";
+      
+      // clear input field
+      document.getElementById("guess-number").value = "";
+    };
   </script>
 </body>
 </html>
