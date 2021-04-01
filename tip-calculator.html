@@ -6,8 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tip Calculator</title>
 </head>
+<style>
+  .container {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
 <body>
   <h1>Tip Calculator</h1>
+  <div class="container">
+    <label for="bill-total">What is your bill total?</label>
+    <input type="text" id="bill-total" name="bill-total">
+    <button onclick="calculateTheTip()">tip</button>
+  </div>
+  <p id="tip-results"></p>
 </body>
 <script>
 // Calculate the tip
