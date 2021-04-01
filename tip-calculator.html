@@ -47,9 +47,10 @@
 
       // calculate according to tip percentages
       for (tipPercentage of tipPercentages) {
-        const totalWithTip = userInput + (userInput * tipPercentage);
-        // FIXME: round up to two decimal places for tipAmount
-        const tipAmount = userInput * tipPercentage;
+        
+        // totals rounded to two decimal places
+        const tipAmount = Math.round(userInput * tipPercentage * 100) / 100;
+        const totalWithTip = Math.round((userInput + tipAmount) * 100) / 100;
 
         total.push({
           "withoutTip": userInput,
@@ -58,6 +59,7 @@
         })
       };
 
+      // display the results
       console.log(total);
     };
 </script>
