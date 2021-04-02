@@ -20,7 +20,7 @@
     <input type="text" id="bill-total" name="bill-total">
     <button onclick="calculateTheTip()">tip</button>
   </div>
-  <p id="tip-results"></p>
+  <div id="tip-results"></div>
   <script>
     // Calculate the tip
 
@@ -37,30 +37,69 @@
 
     function calculateTheTip() {
       // get user input for total bill
-      const userInput = Number(document.getElementById("bill-total").value);
+      const userInput = document.getElementById("bill-total").value;
+      
+      // if no user input
+      if (!userInput) return;
+
+      // format user input
+      function format(string) {
+        // input is $...
+        if (string.includes("$")) string = string.slice(string.indexOf("$") + 1);
+        
+        // input is ##
+        if (!string.includes(".")) return string + ".00";
+
+        // input is "##.### or more"
+        if (string.includes(".") && string.length - string.indexOf(".") > 3) return string.slice(0, string.indexOf(".") + 3);
+
+        // input is "##."
+        if (string.includes(".") && string.length - string.indexOf(".") === 1) return string + "00";
+        
+        // input is "##.#"
+        if (string.includes(".") && string.length - string.indexOf(".") === 2) return string + "0";
+
+        // input is "##.##"
+        else return string;
+      };
+
+      let bill = format(userInput);
 
       // tip amounts
       const tipPercentages = [.18, .20, .25];
 
       // total of bill with tip
-      let total = [];
+      let totals = [];
 
       // calculate according to tip percentages
       for (tipPercentage of tipPercentages) {
         
         // totals rounded to two decimal places
-        const tipAmount = Math.round(userInput * tipPercentage * 100) / 100;
-        const totalWithTip = Math.round((userInput + tipAmount) * 100) / 100;
+        const tipAmount = Math.round(Number(bill) * tipPercentage * 100) / 100;
+        const totalWithTip = Math.round((Number(bill) + tipAmount) * 100) / 100;
+        
+        // tip percent for display
+        const percent = tipPercentage * 100;
 
-        total.push({
-          "withoutTip": userInput,
-          "withTip": totalWithTip,
-          "justTip": tipAmount
+        totals.push({
+          "percentTip": percent,
+          "tip": format(String(tipAmount)),
+          "withTip": format(String(totalWithTip))
         })
       };
 
       // display the results
-      console.log(total);
+      const displayTotal = document.getElementById("tip-results");
+      const defaultMessage = `Your bill is $${bill}.`;
+      displayTotal.innerHTML = defaultMessage;
+      totals.forEach(total => {
+        displayTotal.innerHTML += `
+          <p>${total.percentTip}% tip: $${total.tip} total: $${total.withTip}</p>
+        `;
+      });
+
+      // reset input field
+      document.getElementById("bill-total").value = "";
     };
 </script>
 </body>
