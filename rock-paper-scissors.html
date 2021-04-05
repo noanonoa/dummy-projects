@@ -69,8 +69,32 @@
         }
     });
 
+    // game logic
     const calculateGameResult = (playerOption) => {
-      console.log("Player chose:",playerOption);
+      // computer chooses random number
+      let computerOption = Math.round( Math.random() * 2 );
+      console.log(computerOption);
+
+      switch (computerOption) {
+        // rock
+        case 0:
+          computerOption = "rock";
+          break;
+
+        // paper
+        case 1:
+          computerOption = "paper";
+          break;
+        
+        // scissors
+        case 2:
+          computerOption = "scissors";
+          break;
+      }
+      
+      console.log(computerOption);
+      // if player option is the same as computer option, we have a tie
+      // if player option is different than computer option, we compare the two
     };
   </script>
 </body>
