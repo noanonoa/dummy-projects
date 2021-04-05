@@ -11,6 +11,7 @@
     margin: 0;
     padding: 0;
     font-family: Avenir;
+    box-sizing: border-box;
   }
   h1 {
     margin-bottom: 20px;
@@ -23,14 +24,14 @@
     justify-content: space-around;
     align-items: center;
 
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
   }
   .options {
     font-size: 150px;
     width: 180px;
     height: 180px;
     text-align: center;
-    border: 2px dotted black;
+    /* border: 2px dotted black; */
   }
   .scoreboard {
     width: 600px;
@@ -102,9 +103,14 @@
 
         // run program depending on player's choice
         else {
+          document.getElementById("rock").style.border = "none";
+          document.getElementById("paper").style.border = "none";
+          document.getElementById("scissors").style.border = "none";
+          document.getElementById(option).style.border = "5px solid green";
           calculateGameResult(option);
         }
     });
+
     // scoreboard
     let scoreboard = {
       player: 0,
@@ -119,22 +125,26 @@
       
       // display computerOption
       const computerChoice = document.getElementById("computer-choice");
+      computerChoice.style.transformOrigin = "center";
       switch (computerOption) {
         // rock
         case 0:
           computerOption = "rock";
+          computerChoice.style.transform = "rotate(0deg)";
           computerChoice.innerText = "🪨";
           break;
 
         // paper
         case 1:
           computerOption = "paper";
+          computerChoice.style.transform = "rotate(0deg)";
           computerChoice.innerText = "🧻";
           break;
         
         // scissors
         case 2:
           computerOption = "scissors";
+          computerChoice.style.transform = "rotate(180deg)";
           computerChoice.innerText = "✂️";
           break;
       }
