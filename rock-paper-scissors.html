@@ -14,31 +14,35 @@
     box-sizing: border-box;
   }
   h1 {
+    width: 600px;
+    text-align: center;
     margin-bottom: 20px;
-    margin-left: 20px;
   }
   .container {
     width: 600px;
     height: 200px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 
-    /* border: 1px solid blue; */
   }
   .options {
     font-size: 150px;
     width: 180px;
     height: 180px;
     text-align: center;
-    /* border: 2px dotted black; */
   }
   .scoreboard {
-    width: 600px;
-    height: (200 + 1em)px;
+    width: 610px;
+    height: 250px;
     text-align: center;
 
-    border: 5px solid red;
+    color: white;
+    border: 5px solid black;
+    background-color: darkgreen;
+  }
+  .scoreboard > h2 {
+    font-size: 2em;
   }
   .score {
     font-size: 2em;
@@ -46,9 +50,14 @@
     height: 180px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
 
-    border: 1px dotted black;
+    border: 5px solid black;
+  }
+  button {
+    width: 610px;
+    height: 100px;
   }
 </style>
 <body>
@@ -78,6 +87,7 @@
       </div>
     </div>
   </div>
+  <button onclick="resetGame()">Reset</button>
   <script>
     // Rock, Paper, Scissors
 
@@ -101,17 +111,20 @@
           return;
         }
 
-        // run program depending on player's choice
+        // start game
         else {
+          // highlight choice made
           document.getElementById("rock").style.border = "none";
           document.getElementById("paper").style.border = "none";
           document.getElementById("scissors").style.border = "none";
           document.getElementById(option).style.border = "5px solid green";
+
+          // run program depending on player's choice
           calculateGameResult(option);
         }
     });
 
-    // scoreboard
+    // scoreboard tracker
     let scoreboard = {
       player: 0,
       computer: 0,
@@ -126,6 +139,8 @@
       // display computerOption
       const computerChoice = document.getElementById("computer-choice");
       computerChoice.style.transformOrigin = "center";
+
+      // reassign computerOption to appropriate option value
       switch (computerOption) {
         // rock
         case 0:
@@ -157,10 +172,12 @@
       // if player option is the same as computer option, we have a tie
       if (playerOption === computerOption) {
         scoreboard.tie++;
+
         // display the new tie score
         scoreboardTie.innerText = scoreboard.tie;
         return;
       }
+      
       // if player option is different than computer option, we compare the two and determine winner
       else {
         switch (playerOption) {
@@ -178,6 +195,20 @@
         scoreboardPlayer.innerText = scoreboard.player;
         scoreboardComputer.innerText = scoreboard.computer;
       }
+    };
+
+    // reset function
+    const resetGame = () => {
+      scoreboard.player = 0;
+      scoreboard.computer = 0;
+      scoreboard.tie = 0;
+      document.getElementById("rock").style.border = "none";
+      document.getElementById("paper").style.border = "none";
+      document.getElementById("scissors").style.border = "none";
+      document.getElementById("computer-choice").innerText = "";
+      document.getElementById("scoreboard-player").innerText = "0";
+      document.getElementById("scoreboard-computer").innerText = "0";
+      document.getElementById("scoreboard-tie").innerText = "0";
     };
   </script>
 </body>
