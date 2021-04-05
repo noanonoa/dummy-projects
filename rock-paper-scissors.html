@@ -20,7 +20,7 @@
     width: 600px;
     height: 200px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 
     border: 1px solid blue;
@@ -32,6 +32,23 @@
     text-align: center;
     border: 2px dotted black;
   }
+  .scoreboard {
+    width: 600px;
+    height: (200 + 1em)px;
+    text-align: center;
+
+    border: 5px solid red;
+  }
+  .score {
+    font-size: 2em;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    border: 1px dotted black;
+  }
 </style>
 <body>
   <h1>Play me Rock, Paper Scissors!</h1>
@@ -39,6 +56,26 @@
     <div id="rock" class="options">👊🏼</div>
     <div id="paper" class="options">🖐🏼</div>
     <div id="scissors" class="options">✌🏼</div>
+  </div>
+  <div class="container">
+    <div id="computer-choice" class="options"></div>
+  </div>
+  <div class="scoreboard">
+    <h2>Scoreboard</h2>
+    <div class="container">
+      <div class="score">
+        <p>Player:</p>
+        <div id="scoreboard-player">0</div>
+      </div>
+      <div class="score">
+        <p>Computer:</p>
+        <div id="scoreboard-computer">0</div>
+      </div>
+      <div class="score">
+        <p>Tie:</p>
+        <div id="scoreboard-tie">0</div>
+      </div>
+    </div>
   </div>
   <script>
     // Rock, Paper, Scissors
@@ -68,33 +105,69 @@
           calculateGameResult(option);
         }
     });
+    // scoreboard
+    let scoreboard = {
+      player: 0,
+      computer: 0,
+      tie: 0
+    };
 
     // game logic
     const calculateGameResult = (playerOption) => {
       // computer chooses random number
       let computerOption = Math.round( Math.random() * 2 );
-      console.log(computerOption);
-
+      
+      // display computerOption
+      const computerChoice = document.getElementById("computer-choice");
       switch (computerOption) {
         // rock
         case 0:
           computerOption = "rock";
+          computerChoice.innerText = "🪨";
           break;
 
         // paper
         case 1:
           computerOption = "paper";
+          computerChoice.innerText = "🧻";
           break;
         
         // scissors
         case 2:
           computerOption = "scissors";
+          computerChoice.innerText = "✂️";
           break;
       }
-      
-      console.log(computerOption);
+
+      // display scoreboard
+      const scoreboardPlayer = document.getElementById("scoreboard-player");
+      const scoreboardComputer = document.getElementById("scoreboard-computer");
+      const scoreboardTie = document.getElementById("scoreboard-tie");
+
       // if player option is the same as computer option, we have a tie
-      // if player option is different than computer option, we compare the two
+      if (playerOption === computerOption) {
+        scoreboard.tie++;
+        // display the new tie score
+        scoreboardTie.innerText = scoreboard.tie;
+        return;
+      }
+      // if player option is different than computer option, we compare the two and determine winner
+      else {
+        switch (playerOption) {
+          case "rock":
+            (computerOption === "paper") ? scoreboard.computer++ : scoreboard.player++;
+            break;
+          case "paper":
+            (computerOption === "scissors") ? scoreboard.computer++ : scoreboard.player++;
+            break;
+          case "scissors":
+            (computerOption === "rock") ? scoreboard.computer++ : scoreboard.player++;
+            break;
+        }
+        // display the new score
+        scoreboardPlayer.innerText = scoreboard.player;
+        scoreboardComputer.innerText = scoreboard.computer;
+      }
     };
   </script>
 </body>
