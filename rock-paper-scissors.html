@@ -6,10 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rock, Paper, Scissors</title>
 </head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: Avenir;
+  }
+  h1 {
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
+  .container {
+    width: 600px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 1px solid blue;
+  }
+  .options {
+    font-size: 150px;
+    width: 180px;
+    height: 180px;
+    text-align: center;
+    border: 2px dotted black;
+  }
+</style>
 <body>
-  
-</body>
-<script>
+  <h1>Play me Rock, Paper Scissors!</h1>
+  <div class="container">
+    <div id="rock" class="options">👊🏼</div>
+    <div id="paper" class="options">🖐🏼</div>
+    <div id="scissors" class="options">✌🏼</div>
+  </div>
+  <script>
 // Rock, Paper, Scissors
 
 // This is a popular game played between two people. Each player gets to form one of three shapes using their hand:
@@ -17,5 +48,6 @@
 // rock (a closed fist)
 // paper (a flat hand)
 // scissors (a fist with the index finger and middle finger extended, forming a V)
-</script>
+  </script>
+</body>
 </html>
