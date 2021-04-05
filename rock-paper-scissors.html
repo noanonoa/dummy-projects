@@ -41,41 +41,37 @@
     <div id="scissors" class="options">✌🏼</div>
   </div>
   <script>
-// Rock, Paper, Scissors
+    // Rock, Paper, Scissors
 
-// This is a popular game played between two people. Each player gets to form one of three shapes using their hand:
+    // This is a popular game played between two people. Each player gets to form one of three shapes using their hand:
 
-// rock (a closed fist)
-// paper (a flat hand)
-// scissors (a fist with the index finger and middle finger extended, forming a V)
+    // rock (a closed fist)
+    // paper (a flat hand)
+    // scissors (a fist with the index finger and middle finger extended, forming a V)
 
-// onclick, we want to choose options "rock", "paper", "scissors"
-document.addEventListener("click", (e) => {
-  // get player option
-  const option = e.target.id;
+    // onclick, we want to choose options "rock", "paper", "scissors"
+    document.addEventListener("click", (e) => {
+      // get player option
+      const option = e.target.id;
 
-  // if user clicks anywhere outside of the options div, we don't need interaction
-  if (
-    option !== "rock" &&
-    option !== "paper" &&
-    option !== "scissors"
-    ) {
-      return;
-    }
+      // if user clicks anywhere outside of the options div, we don't need interaction
+      if (
+        option !== "rock" &&
+        option !== "paper" &&
+        option !== "scissors"
+        ) {
+          return;
+        }
 
-    // run program depending on player's choice
-    switch(option) {
-      case "rock": 
-        console.log("Player chose Rock");
-        break;
-      case "paper":
-        console.log("Player chose Paper");
-        break;
-      case "scissors":
-        console.log("Player chose Scissors");
-        break;
+        // run program depending on player's choice
+        else {
+          calculateGameResult(option);
+        }
+    });
+
+    const calculateGameResult = (playerOption) => {
+      console.log("Player chose:",playerOption);
     };
-});
   </script>
 </body>
 </html>
